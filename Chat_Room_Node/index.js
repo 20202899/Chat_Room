@@ -25,6 +25,7 @@ io.on("connection", (socket) => {
 
         rooms.add(data);
         socket.join(data);
+        
         socket.leave(data);
         io.sockets.emit("result_chat", Array.from(rooms));
     });
