@@ -7,6 +7,8 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.nkzawa.socketio.client.IO
@@ -21,10 +23,8 @@ class MainActivity : AppCompatActivity() {
 
     val mSocketChat: Socket = IO.socket("http://192.168.1.106:3000/")
     private val mHandler = Handler()
-    private var room = 0
     private val mAdapter = CustomAdapter()
     private val mGson = Gson()
-
     companion object {
         var sInstance: MainActivity? = null
     }
@@ -37,8 +37,7 @@ class MainActivity : AppCompatActivity() {
         sInstance = this
 
         fab.setOnClickListener { view ->
-            if (mSocketChat.connected())
-                mSocketChat.emit("create-chat", "Otaku - Chats ${room++}")
+            alertImput()
         }
 
         mSocketChat.on("result_chat") {
@@ -74,15 +73,6 @@ class MainActivity : AppCompatActivity() {
         initRecyclerview()
     }
 
-    private fun initRecyclerview() {
-        recyclerview.setHasFixedSize(true)
-        recyclerview.layoutManager = LinearLayoutManager(
-            this,
-            LinearLayoutManager.VERTICAL, false
-        )
-        recyclerview.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        recyclerview.adapter = mAdapter
-    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -98,5 +88,27 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun initRecyclerview() {
+        recyclerview.setHasFixedSize(true)
+        recyclerview.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.VERTICAL, false
+        )
+        recyclerview.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        recyclerview.adapter = mAdapter
+    }
+
+    private fun alertImput() {
+        val input = EditText(this)
+        AlertDialog.Builder(this)
+            .setView(input)
+            .setTitle("Nome do chat")
+            .setPositiveButton(android.R.string.ok) {a, b ->
+                if (mSocketChat.connected())
+                    mSocketChat.emit("create-chat", input.text.toString())
+            }
+            .setNegativeButton(android.R.string.cancel, null).show()
     }
 }
