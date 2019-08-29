@@ -25,8 +25,6 @@ io.on("connection", (socket) => {
 
         rooms.add(data);
         socket.join(data);
-        
-        socket.leave(data);
         io.sockets.emit("result_chat", Array.from(rooms));
     });
 
@@ -36,7 +34,14 @@ io.on("connection", (socket) => {
     });
 
     socket.on("leave-chat", (data) => {
+        // socket.leave(data);
         socket.leave(data);
+        io.in(data).clients((err, clients) => {
+            if (clients.length < 1) {
+                rooms.delete(data);
+                io.sockets.emit("result_chat", Array.from(rooms));
+            }
+        });
     });
 
     socket.on("send-message-chat", (data) => {

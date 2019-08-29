@@ -26,13 +26,10 @@ class ChatActivity : AppCompatActivity() {
                 Toast.makeText(this@ChatActivity, it[0].toString(), Toast.LENGTH_LONG)
                     .show()
             }
+        }?.on("messages-chat") {
+
         }
-        MainActivity.sInstance?.mSocketChat?.on("messages-chat") {
-//            mHandler.post {
-//                Toast.makeText(this@ChatActivity, it[0].toString(), Toast.LENGTH_LONG)
-//                    .show()
-//            }
-        }
+
         fab.setOnClickListener {
             if ( MainActivity.sInstance?.mSocketChat?.connected() == true) {
                 val message = Message(mKey, field1.text.toString())

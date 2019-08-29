@@ -1,5 +1,6 @@
 package br.com.carlosiwakura.Chat_Room_Android
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private val mHandler = Handler()
     private val mAdapter = CustomAdapter()
     private val mGson = Gson()
+    private var mRoomName = ""
     companion object {
         var sInstance: MainActivity? = null
     }
@@ -48,8 +50,15 @@ class MainActivity : AppCompatActivity() {
             mAdapter.data.addAll(a.toList())
             mHandler.post { mAdapter.notifyDataSetChanged() }
 
-            if (mAdapter.data.size > 0)
-                mSocketChat.emit("leave-chat", mAdapter.data.last())
+            if (mAdapter.data.size > 0) {
+                val roomCreated = mAdapter.data.last()
+                if (mRoomName == roomCreated) {
+                    val intent = Intent(this@MainActivity, ChatActivity::class.java)
+                    intent.putExtra("key", roomCreated)
+                    startActivity(intent)
+                    mRoomName = ""
+                }
+            }
         }
 
         mSocketChat.on(Socket.EVENT_CONNECT) {
@@ -84,10 +93,7 @@ class MainActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initRecyclerview() {
@@ -106,8 +112,11 @@ class MainActivity : AppCompatActivity() {
             .setView(input)
             .setTitle("Nome do chat")
             .setPositiveButton(android.R.string.ok) {a, b ->
-                if (mSocketChat.connected())
-                    mSocketChat.emit("create-chat", input.text.toString())
+                if (mSocketChat.connected()) {
+                    val value = input.text.toString()
+                    mRoomName = value
+                    mSocketChat.emit("create-chat", value)
+                }
             }
             .setNegativeButton(android.R.string.cancel, null).show()
     }
