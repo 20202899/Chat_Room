@@ -12,11 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="br.com.carlosiwakura.Chat_Room_Android.ChatActivity"
+            android:name="br.com.carlosiwakura.Chat_Room_Android.activities.ChatActivity"
             android:label="@string/title_activity_chat"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name="br.com.carlosiwakura.Chat_Room_Android.MainActivity"
+            android:name="br.com.carlosiwakura.Chat_Room_Android.activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

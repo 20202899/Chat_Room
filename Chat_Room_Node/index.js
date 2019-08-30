@@ -47,7 +47,7 @@ io.on("connection", (socket) => {
     socket.on("send-message-chat", (data) => {
         let json = JSON.parse(data);
         messages[json["room"]].push(json["message"]);
-        io.sockets.in(json["room"]).emit("receive-message", json["message"]);
+        io.sockets.in(json["room"]).emit("receive-message", data);
     });
 
     socket.emit("result_chat", Array.from(rooms));
