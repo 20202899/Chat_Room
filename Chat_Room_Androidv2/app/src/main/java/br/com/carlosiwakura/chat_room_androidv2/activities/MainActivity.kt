@@ -16,7 +16,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
         fab.navigate = nav_host.findNavController()
+        fab.activity = this
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

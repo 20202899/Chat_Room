@@ -10,11 +10,7 @@
         android:label="EnterNameFragment" >
         <action
             android:id="@+id/action_enterNameFragment4_to_createChatFragment"
-            app:destination="@id/createChatFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/slide_out"
-            app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out" />
+            app:destination="@+id/createChatFragment" />
     </fragment>
 
     <fragment android:id="@+id/createChatFragment"
@@ -22,11 +18,7 @@
         android:label="CreateChat">
         <action
             android:id="@+id/action_createChatFragment_to_chat"
-            app:destination="@id/chat"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/slide_out"
-            app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out" />
+            app:destination="@id/chat" />
     </fragment>
 
     <fragment android:label="Chat"
@@ -34,10 +26,6 @@
         android:id="@+id/chat">
         <action
             android:id="@+id/action_chat_to_createChatFragment"
-            app:destination="@id/createChatFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/slide_out"
-            app:popEnterAnim="@anim/slide_in"
-            app:popExitAnim="@anim/slide_out" />
+            app:destination="@id/createChatFragment" />
     </fragment>
 </navigation>

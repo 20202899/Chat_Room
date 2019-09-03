@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.transition.TransitionInflater
 import br.com.carlosiwakura.chat_room_androidv2.R
 import br.com.carlosiwakura.chat_room_androidv2.activities.MainActivity
 import br.com.carlosiwakura.chat_room_androidv2.views.CustomFab
@@ -21,7 +22,8 @@ class CreateChatFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.title = "Criar um Chat"
+        enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.slide_right)
+        activity?.title = "Lista de Chat"
         activity?.fab?.typeNavigation = CustomFab.TypeNavigation.CreateChatType
         activity?.fab?.setImageResource(R.drawable.ic_add_white_24dp)
         activity?.let {
