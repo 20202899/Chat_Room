@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/enterNameFragment4">
+    <fragment
+        android:id="@+id/enterNameFragment4"
+        android:name="br.com.carlosiwakura.chat_room_androidv2.fragments.EnterNameFragment"
+        android:label="EnterNameFragment" >
+        <action
+            android:id="@+id/action_enterNameFragment4_to_createChatFragment"
+            app:destination="@id/createChatFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/slide_out" />
+    </fragment>
+
+    <fragment android:id="@+id/createChatFragment"
+        android:name="br.com.carlosiwakura.chat_room_androidv2.fragments.CreateChatFragment"
+        android:label="CreateChat">
+        <action
+            android:id="@+id/action_createChatFragment_to_chat"
+            app:destination="@id/chat"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/slide_out" />
+    </fragment>
+
+    <fragment android:label="Chat"
+        android:name="br.com.carlosiwakura.chat_room_androidv2.fragments.ChatFragment"
+        android:id="@+id/chat">
+        <action
+            android:id="@+id/action_chat_to_createChatFragment"
+            app:destination="@id/createChatFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/slide_out" />
+    </fragment>
+</navigation>
