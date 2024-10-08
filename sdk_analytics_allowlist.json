@@ -1,0 +1,30 @@
+{
+  "events": [
+    {
+      "event": "screen_view",
+      "regex": "^[a-zA-Z0-9_.]+$",
+      "regex_match_required": true,
+      "rule": "O valor deve conter apenas letras, números, sublinhados e pontos.",
+      "required_parameters": [
+        "custom_path",
+        "implementation_team"
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "name": "custom_path",
+      "type": "string",
+      "regex": "^\\/[a-zA-Z0-9_\\/-]+$",
+      "regex_match_required": true,
+      "rule": "O valor deve ser um caminho válido, começando com '/' e contendo apenas letras, números, sublinhados, barras e hífens."
+    },
+    {
+      "name": "implementation_team",
+      "type": "string",
+      "regex": "^[a-zA-Z0-9_\\s]+$",
+      "regex_match_required": true,
+      "rule": "O valor deve conter apenas letras, números, sublinhados e espaços."
+    }
+  ]
+}
