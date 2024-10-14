@@ -9,6 +9,17 @@
         "custom_path",
         "implementation_team"
       ]
+    },
+    {
+      "event": "click",
+      "regex": "^[a-zA-Z0-9_.]+$",
+      "regex_match_required": true,
+      "rule": "O valor deve conter apenas letras, números, sublinhados e pontos.",
+      "required_parameters": [
+        "custom_path",
+        "implementation_team",
+        "detail"
+      ]
     }
   ],
   "parameters": [
@@ -21,6 +32,13 @@
     },
     {
       "name": "implementation_team",
+      "type": "string",
+      "regex": "^[a-zA-Z0-9_\\s]+$",
+      "regex_match_required": true,
+      "rule": "O valor deve conter apenas letras, números, sublinhados e espaços."
+    },
+    {
+      "name": "detail",
       "type": "string",
       "regex": "^[a-zA-Z0-9_\\s]+$",
       "regex_match_required": true,
